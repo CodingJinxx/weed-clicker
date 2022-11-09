@@ -5,7 +5,7 @@ const bakers = [
   {
     name: "Small 1x1 Tent Amnesia Haze",
     defaultValue: 50,
-    defaultCps: 1
+    defaultCps: 1000000000000000000000000000000000000
   },
   {
     name: "Medium 2x2 Tent Purple Queen",
