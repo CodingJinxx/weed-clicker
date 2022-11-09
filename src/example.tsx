@@ -1,49 +1,31 @@
-import "./App.css";
+import "./styles.css";
 import { useState, useEffect, useRef } from "react";
+import Cookie from "./Cookie";
 
 const bakers = [
   {
-    name: "Small 1x1 Tent Amnesia Haze",
-    defaultValue: 50,
+    name: "copper drill",
+    defaultValue: 10,
     defaultCps: 1
   },
   {
-    name: "Medium 2x2 Tent Purple Queen",
+    name: "iron drill",
     defaultValue: 200,
     defaultCps: 10
   },
   {
-    name: "Large 3x3 Tent White Widow",
-    defaultValue: 500,
+    name: "gold drill",
+    defaultValue: 5000,
     defaultCps: 25
   },
   {
-    name: "Grow Hut 10x10 Random Strains",
-    defaultValue: 4000,
-    defaultCps: 100
-  },
-  {
-    name: "Grow Center",
-    defaultValue: 100000000,
-    defaultCps: 100000
+    name: "diamond drill",
+    defaultValue: 10000,
+    defaultCps: 50
   }
 ];
 
 export default function App() {
-  const [countSave, saveCount] = useState([]);
-
-  useEffect(() => {
-    localStorage.setItem('game-save', JSON.stringify(countSave));
-  }, [countSave]);
-
-
-  // useEffect(() => {
-  //   const items = JSON.parse(localStorage.getItem('game-save'));
-  //   if (items) {
-  //     saveCount(items);
-  //   }
-  // }, []);
-
   const defaultBakersCount = bakers.map((_) => 0);
   const defaultBakersMagnification = bakers.map((_) => 1);
   const [count, setCount] = useState(0);
@@ -105,25 +87,26 @@ export default function App() {
   }, []);
 
   return (
-    <div className="App wrapper">
+    <div className="App">
       <div className="cookie-component" onClick={onClickCookie}>
-        <img alt="cookie" src="weed.png" className="cookie-img" />
+        <img alt="cookie" src="cookie.png" className="cookie-img" />
       </div>
 
+
       <div className="count-component">
-        <p>{`Weed : ${count.toLocaleString()}g`}</p>
-        <p>{`Weed Per Second : ${cps.toLocaleString()}g`}</p>
+        <p>{`cookies : ${count.toLocaleString()}`}</p>
+        <p>{`cps : ${cps.toLocaleString()}`}</p>
       </div>
-      <div className="overflow-y-auto flex flex-row justify-center align-center" style={{'height' : '400px'}}>
+
       {bakers.map((baker, idx) => {
         return (
           <div key={baker.name} className="baker-component">
             <p>{`${baker.name} ( cost : ${bakersBuyFee(
               idx
-            ).toLocaleString()} weed )`}</p>
+            ).toLocaleString()} cookies )`}</p>
             <p>{`count : ${bakersCount[idx].toLocaleString()} ${
               bakersMagnification[idx] !== 1
-                ? `( x${bakersMagnification[idx]} grow boost )`
+                ? `( x${bakersMagnification[idx]} boost )`
                 : ""
             }`}</p>
             <div className="button-area">
@@ -144,7 +127,7 @@ export default function App() {
             </div>
           </div>
         );
-      })}</div>
+      })}
     </div>
   );
 }
